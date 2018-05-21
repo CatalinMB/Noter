@@ -1,0 +1,14 @@
+<header class="header">
+
+  <div id="component-name">
+    <h1>Reminders</h1>
+  </div>
+
+  <div class="field">
+  <input class="new-reminder" placeholder="Add a reminder..." autofocus="" [(ngModel)]="newReminder.title"
+    (keyup.enter)="addReminder()">
+  <input class="pick" atp-time-picker onsubmit="addReminder()" >
+</div>
+
+    
+</header>

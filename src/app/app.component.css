@@ -1,0 +1,13 @@
+.navigator{
+    float: left;
+    min-height:0 !important;
+    height: 40px;
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    align-content: flex-end;
+}
+.menuItemWrapper{
+    height: 40px;
+}
+

@@ -1,0 +1,51 @@
+#component-name{
+    width: 100%;
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    /* text-align: center; */
+    font-size: 80px;
+    color: #4d4d4d;
+    opacity: 0.35;
+    margin: auto;
+}
+
+button{
+    
+
+    background-color: #FFC107;
+    margin-right: 70px;
+    margin-top: 0; 
+}
+
+.layout-1, .layout-2{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+
+    .layout-1 div{
+        margin: 10px;
+        margin-bottom: 100px;
+    }
+
+    .layout-2 div {
+        margin-right: 60px;
+        margin-top: 0;
+    }
+
+    p{
+        
+        font-size: 20px;
+    }
+
+    h6{
+        margin:40px;
+    }

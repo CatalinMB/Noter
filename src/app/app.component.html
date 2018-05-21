@@ -1,0 +1,39 @@
+<head>
+</head>
+
+
+<mat-toolbar color="accent" class="navigator">
+  <mat-toolbar-row class="menuItemWrapper">
+      <a routerLink="/welcome">
+    <button mat-button>
+      Home
+    </button>
+  </a>
+  <a routerLink="/note">
+    <button mat-button>
+     Notes
+    </button>
+  </a>
+  <a routerLink="/todo">
+    <button mat-button>
+     ToDos
+    </button>
+  </a>
+  <a routerLink="/reminder">
+    <button mat-button>
+      Reminders
+    </button>
+  </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<!-- <div class="nav-wrapper">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="/welcome" routerLink="/welcome">Home</a></li>
+          <li><a href="/note" routerLink="/note">Notes</a></li>
+          <li><a href="/todo" routerLink="/todo">ToDos</a></li>
+        </ul>
+      </div> -->
+<router-outlet></router-outlet>

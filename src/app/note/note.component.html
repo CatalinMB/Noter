@@ -1,0 +1,6 @@
+<section class="noter">
+    <app-note-list-header (add)="onAddNote($event)"></app-note-list-header>
+    <app-note-list [notes]="notes" 
+    (remove)="onRemoveNote($event)"></app-note-list>
+    <app-note-list-footer [notes]="notes"></app-note-list-footer>
+</section>

@@ -1,0 +1,9 @@
+<div class="view">
+    <label class="reminder-item">
+      {{reminder.getTime}}
+      {{reminder.title}}
+    <!-- <pre>{{ reminder.time.hours | json}}</pre> :
+    <pre>{{ reminder.time.minutes | json}}</pre> -->
+    </label>
+    <button class="destroy" (click)="removeReminder(reminder)"></button>
+  </div>

@@ -1,0 +1,13 @@
+<section class="main" *ngIf="reminders.length > 0">
+    <nav>
+    <ul class="reminder-list">
+      <div class="dash">
+      <li *ngFor="let reminder of reminders">
+        <app-reminder-list-item
+          [reminder]="reminder"
+          (remove)="onRemoveReminder($event)"></app-reminder-list-item>
+      </li>
+    </div>
+    </ul>
+    </nav>
+  </section>

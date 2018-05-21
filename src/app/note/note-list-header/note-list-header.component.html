@@ -1,0 +1,8 @@
+<header class="header">
+  <div id="component-name">
+      <h1>Notes</h1>
+  </div>
+  
+  <input class="new-note" placeholder="Write a note..." autofocus="" [(ngModel)]="newNote.title" 
+    (keyup.enter)="addNote()">
+</header>
