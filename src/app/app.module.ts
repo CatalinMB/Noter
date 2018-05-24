@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
-
+import { AuthGuard } from './auth-guard';
 import { AppComponent } from './app.component';
 import { NoteDataService } from './note/note-data.service';
 import { NoteListHeaderComponent } from './note/note-list-header/note-list-header.component';
@@ -37,6 +38,9 @@ import { routerReducer } from '@angular-redux/router';
 import { NgReduxRouterModule, NgReduxRouter } from '@angular-redux/router';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes/routes';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import {AuthService} from './auth.service';
 
 
 
@@ -59,7 +63,9 @@ import { appRoutes } from './routes/routes';
     ReminderListComponent,
     ReminderListItemComponent,
     ReminderListFooterComponent,
-    ReminderListHeaderComponent
+    ReminderListHeaderComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -70,11 +76,12 @@ import { appRoutes } from './routes/routes';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes),
     NgReduxModule,
     NgReduxRouterModule.forRoot()
   ],
-  providers: [NoteDataService, TodoDataService, ReminderDataService],
+  providers: [NoteDataService, TodoDataService, ReminderDataService, AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 

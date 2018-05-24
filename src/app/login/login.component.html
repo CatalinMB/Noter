@@ -1,0 +1,22 @@
+<section class="login">
+  <div class="flex-container">
+    <div class="logInHeader">
+      <p id="text-header">Welcome!</p>
+    </div>
+
+    <div class="inputs" (submit)="onSubmit($event)">
+      <form class="signInForm">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" id="email-field" type="text" name="email" required="">
+          <label class="mdl-textfield__label" for="email-field">E-mail</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="password-field">Password</label>
+          <input class="mdl-textfield__input" id="password-field" type="password" name="password" required="">
+        </div>
+        <a href="/signup">Sign Up</a>
+        <input id="submitButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="submit" value="LogIn">
+      </form>
+    </div>
+  </div>
+</section>

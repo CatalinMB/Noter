@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ReminderDataService } from './reminder-data.service';
 import { Reminder } from './reminder';
+import { SweetAlert } from 'sweetalert/typings/core';
+
 
 @Component({
   selector: 'app-reminder',
@@ -8,7 +10,7 @@ import { Reminder } from './reminder';
   styleUrls: ['./reminder.component.css'],
   providers: []
 })
-export class ReminderComponent implements OnInit  {
+export class ReminderComponent implements OnInit {
   title = 'app';
   // newreminder: reminder = new reminder();
 
@@ -26,6 +28,12 @@ export class ReminderComponent implements OnInit  {
 
   onAddReminder(reminder: Reminder) {
     this.reminderDataService.addReminder(reminder);
+    setInterval(function () {
+      const date = new Date();
+      if (date.getHours() === reminder.time.hours && date.getMinutes() === reminder.time.minutes) {
+          alert(reminder.title);
+      }
+  }, 60000);
   }
 
   onRemoveReminder(reminder) {

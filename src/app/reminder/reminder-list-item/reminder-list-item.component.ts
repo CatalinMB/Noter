@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Reminder } from '../reminder';
+import * as ot from 'ontime';
 
 @Component({
   selector: 'app-reminder-list-item',
@@ -16,6 +17,7 @@ export class ReminderListItemComponent {
   constructor() {
   }
 
+  
 
   removeReminder(reminder: Reminder) {
     this.remove.emit(reminder);
