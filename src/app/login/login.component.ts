@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(event) {
 
-      console.log('hello2');
       event.preventDefault();
 
       let logemail = $("#email-field").val();
@@ -31,7 +30,6 @@ export class LoginComponent implements OnInit {
       })
         .done(() => {
           this.auth.isLoggedIn = true;
-          console.log('hello3');
         });
 
   }

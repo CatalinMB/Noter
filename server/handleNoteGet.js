@@ -17,7 +17,6 @@ function getNotes(res) {
 
 function handleNoteGet(req, res){
     Note.find({},function(err,data){
-        console.log(res, 'let us see the messages');
         res.send(data);
         // get and return all the notes after you create another
         getNotes(res);

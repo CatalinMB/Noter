@@ -1,7 +1,6 @@
 var User = require('./models/User.js')
 
 function handleLogIn(req, res) {
-    console.log('login', req.body)
     var userdata = {
         email: req.body.email,
         password: req.body.password
@@ -15,7 +14,6 @@ function handleLogIn(req, res) {
       } else {
         req.session.userId = user._id;
         req.session.user = user;
-        console.log("hey ", req.session);
         return res.send({ redirect: '/messages'});
       }
     });

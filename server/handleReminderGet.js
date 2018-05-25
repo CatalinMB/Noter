@@ -17,7 +17,6 @@ function getReminders(res) {
 
 function handleReminderGet(req, res){
     Reminder.find({},function(err,data){
-        console.log(res, 'let us see the messages');
         res.send(data);
         // get and return all the reminders after you create another
         getReminders(res);

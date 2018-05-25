@@ -2,8 +2,6 @@ var User = require('./models/User.js')
 
 function handleRegister(req, res) {
 
-    console.log(req);
-    console.log("signup",req.body);
 
     var userData = {
         email: req.body.email,

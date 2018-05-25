@@ -8,7 +8,7 @@ var handleNoteCreate = require('./handleNoteCreate');
 var handleNoteGet = require('./handleNoteGet');
 var handleReminderCreate = require('./handleReminderCreate');
 var handleReminderGet = require('./handleReminderGet');
-// var handleTodoDelete = require('./handleTodoDelete');
+var handleTodoDelete = require('./handleTodoDelete');
 var path = require ('path');
 var session = require('express-session');
 
@@ -34,7 +34,7 @@ router.post('/note', handleNoteCreate);
 router.get('/reminder', handleReminderGet);
 router.post('/reminder', handleReminderCreate);
 
-// router.delete('/todo/todo', handleTodoDelete);
+router.delete('/todo/:id', handleTodoDelete);
 // CONTINUE FROM HERE
 
 

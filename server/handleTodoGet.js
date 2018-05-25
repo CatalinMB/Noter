@@ -19,8 +19,6 @@ function handleTodoGet(req, res){
     Todo.find({},function(err,data){
         console.log(res, 'let us see the messages');
         res.send(data);
-        // get and return all the todos after you create another
-        getTodos(res);
     });
 
 }

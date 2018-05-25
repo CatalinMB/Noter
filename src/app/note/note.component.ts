@@ -28,9 +28,9 @@ export class NoteComponent implements OnInit  {
     this.noteDataService.addNote(note);
   }
 
-  onRemoveNote(note) {
-    this.noteDataService.deleteNotesById(note.id);
-  }
+  // onRemoveNote(note) {
+  //   this.noteDataService.deleteNotesById(note.id);
+  // }
 
   get notes() {
     return this.noteDataService.getAllNotes();

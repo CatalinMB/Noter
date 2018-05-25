@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost:27017/noter');
 var db = mongoose.connection;
 
 db.once('open', function () {
-  console.log("worksssss!");
+  console.log("MongoDB opened.");
 });
 
 //use sessions for tracking logins

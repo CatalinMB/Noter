@@ -21,7 +21,6 @@ function handleNoteCreate(req, res) {
         title: req.body.title,
     }
 
-   // console.log(messageData);
     Note.create(noteData, function (err, note) {
         if (err) {
             res.send(err);

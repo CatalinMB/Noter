@@ -16,7 +16,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(event){
-      console.log("bunaaa", event);
       event.preventDefault();
 
       let semail = $("#semail-field").val();

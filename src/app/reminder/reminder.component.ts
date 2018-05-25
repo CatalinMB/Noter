@@ -37,12 +37,12 @@ export class ReminderComponent implements OnInit {
   }
 
   onRemoveReminder(reminder) {
-    this.reminderDataService.deleteRemindersById(reminder.id);
+    this.reminderDataService.deleteReminderById(reminder.id);
   }
 
-  get reminders() {
-    return this.reminderDataService.getAllReminders();
-  }
+  // get reminders() {
+  //   return this.reminderDataService.getAllReminders();
+  // }
 
 }
 

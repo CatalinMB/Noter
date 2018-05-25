@@ -22,7 +22,6 @@ function handleReminderCreate(req, res) {
         time: req.body.time
     }
 
-   // console.log(messageData);
     Reminder.create(reminderData, function (err, reminder) {
         if (err) {
             res.send(err);

@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Todo} from './todo';
+import { Injectable } from '@angular/core';
+import { Todo } from './todo';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -9,15 +9,15 @@ import { Http, Response } from '@angular/http';
 @Injectable()
 export class TodoDataService {
 
-  lastId = 0;
+  lastId = this.getAllTodos.length;
 
   constructor(private http: Http) {
   }
 
   // Simulate POST /todos
   addTodo(todo: Todo): Observable<Todo> {
-    if (!todo.id) {
-      todo.id = ++this.lastId;
+    if (todo.id) {
+      todo.id = this.lastId + 1;
     }
     return this.http
       .post('http://localhost:3000/todo', todo)
@@ -57,7 +57,7 @@ export class TodoDataService {
   }
 
   // Simulate GET /todos/:id
- getTodoById(todoId: number): Observable<Todo> {
+  getTodoById(todoId: number): Observable<Todo> {
     return this.http
       .get('http://localhost:3000/todo' + todoId)
       .map(response => {
@@ -72,7 +72,7 @@ export class TodoDataService {
     return this.updateTodo(todo);
   }
 
-  private handleError (error: Response | any) {
+  private handleError(error: Response | any) {
     console.error('handleError', error);
     return Observable.throw(error);
   }

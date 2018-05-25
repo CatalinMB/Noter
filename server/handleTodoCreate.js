@@ -29,7 +29,6 @@ function handleTodoCreate(req, res) {
         } else {
             res.send(todo);
         }
-        getTodos(res);
     });
     
 }
