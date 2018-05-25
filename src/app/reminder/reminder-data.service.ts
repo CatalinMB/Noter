@@ -1,53 +1,64 @@
-import { Injectable } from '@angular/core';
-import { Reminder } from './reminder';
+import {Injectable} from '@angular/core';
+import {Reminder} from './reminder';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import { Http, Response } from '@angular/http';
 
 @Injectable()
 export class ReminderDataService {
 
-  // Placeholder for last id so we can simulate
-  // automatic incrementing of ids
   lastId = 0;
 
-  // Store the reminders
-  reminders: Reminder[] = [];
+  constructor(private http: Http) {
+  }
 
-  constructor() { }
-
-
-  //Simulate POST /reminders
-  //Adding Nodejs functionallity for the future ( for POST )
-  addReminder(reminder: Reminder): ReminderDataService {
+  // Simulate POST /reminders
+  addReminder(reminder: Reminder): Observable<Reminder> {
     if (!reminder.id) {
       reminder.id = ++this.lastId;
     }
-    this.reminders.push(reminder);
-    return this;
+    return this.http
+      .post('http://localhost:3000/reminder', reminder)
+      .map(response => {
+        return new Reminder(response.json());
+      })
+      .catch(this.handleError);
   }
 
-  //Simulate DELETE /reminders/:id
-  //Adding NodeJs ..
-  deleteRemindersById(id: number): ReminderDataService {
-    this.reminders = this.reminders.filter(reminder => reminder.id !== id);
-    return this;
+  // Simulate DELETE /Reminders/:id
+  deleteReminderById(reminderId: number): Observable<null> {
+    return this.http
+      .delete('http://localhost:3000/reminder/' + reminderId)
+      .map(response => null)
+      .catch(this.handleError);
   }
 
-  //Simuate PUT /reminders/id
-  updateRemindersById(id: number, values: Object = {}): Reminder {
-    const reminder = this.getReminderById(id);
-    if (!reminder) {
-      return null;
-    }
-    Object.assign(reminder, values);
-    return reminder;
+
+  // Simulate GET /reminder
+  getAllreminders(): Observable<Reminder[]> {
+    return this.http
+      .get('http://localhost:3000/reminder')
+      .map(response => {
+        const reminders = response.json();
+        return reminders.map((reminder) => new Reminder(reminder));
+      })
+      .catch(this.handleError);
   }
 
-  // Simulate GET /reminders
-  getAllReminders(): Reminder[] {
-    return this.reminders;
+  // Simulate GET /reminders/:id
+ getReminderById(reminderId: number): Observable<Reminder> {
+    return this.http
+      .get('http://localhost:3000/reminder' + reminderId)
+      .map(response => {
+        return new Reminder(response.json());
+      })
+      .catch(this.handleError);
   }
 
-  // Simulate GET /todos/:id
-  getReminderById(id: number): Reminder {
-    return this.reminders.filter(reminder => reminder.id === id).pop();
+  private handleError (error: Response | any) {
+    console.error('handleError', error);
+    return Observable.throw(error);
   }
 }

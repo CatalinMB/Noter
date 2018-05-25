@@ -1,53 +1,64 @@
-import { Injectable } from '@angular/core';
-import { Note } from './note';
+import {Injectable} from '@angular/core';
+import {Note} from './note';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import { Http, Response } from '@angular/http';
 
 @Injectable()
 export class NoteDataService {
 
-  // Placeholder for last id so we can simulate
-  // automatic incrementing of ids
   lastId = 0;
 
-  // Store the notes
-  notes: Note[] = [];
+  constructor(private http: Http) {
+  }
 
-  constructor() { }
-
-
-  //Simulate POST /notes
-  //Adding Nodejs functionallity for the future ( for POST )
-  addNote(note: Note): NoteDataService {
+  // Simulate POST /notes
+  addNote(note: Note): Observable<Note> {
     if (!note.id) {
       note.id = ++this.lastId;
     }
-    this.notes.push(note);
-    return this;
+    return this.http
+      .post('http://localhost:3000/note', note)
+      .map(response => {
+        return new Note(response.json());
+      })
+      .catch(this.handleError);
   }
 
-  //Simulate DELETE /notes/:id
-  //Adding NodeJs ..
-  deleteNotesById(id: number): NoteDataService {
-    this.notes = this.notes.filter(note => note.id !== id);
-    return this;
+  // Simulate DELETE /notes/:id
+  deleteNoteById(noteId: number): Observable<null> {
+    return this.http
+      .delete('http://localhost:3000/note/' + noteId)
+      .map(response => null)
+      .catch(this.handleError);
   }
 
-  //Simuate PUT /notes/id
-  updateNotesById(id: number, values: Object = {}): Note {
-    const note = this.getNoteById(id);
-    if (!note) {
-      return null;
-    }
-    Object.assign(note, values);
-    return note;
-  }
 
   // Simulate GET /notes
-  getAllNotes(): Note[] {
-    return this.notes;
+  getAllNotes(): Observable<Note[]> {
+    return this.http
+      .get('http://localhost:3000/note')
+      .map(response => {
+        const notes = response.json();
+        return notes.map((note) => new Note(note));
+      })
+      .catch(this.handleError);
   }
 
-  // Simulate GET /todos/:id
-  getNoteById(id: number): Note {
-    return this.notes.filter(note => note.id === id).pop();
+  // Simulate GET /notes/:id
+ getNoteById(noteId: number): Observable<Note> {
+    return this.http
+      .get('http://localhost:3000/note' + noteId)
+      .map(response => {
+        return new Note(response.json());
+      })
+      .catch(this.handleError);
+  }
+
+  private handleError (error: Response | any) {
+    console.error('handleError', error);
+    return Observable.throw(error);
   }
 }

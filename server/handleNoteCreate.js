@@ -1,37 +1,36 @@
-var Todo = require('./models/Todo.js');
+var Note = require('./models/Note.js');
 var session = require('express-session')
 var mongoose = require('mongoose');
 
-function getTodos(res) {
-    Todo.find(function (err, todos) {
+function getNotes(res) {
+    Note.find(function (err, notes) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
             res.send(err);
         }
 
-        res.json(todos); // return all todos in JSON format
+        res.json(notes); // return all notes in JSON format
     });
 };
 
-function handleTodoCreate(req, res) {
+function handleNoteCreate(req, res) {
 
-    var todoData = {
+    var noteData = {
         id: req.body.id,
         title: req.body.title,
-        complete: req.body.complete
     }
 
    // console.log(messageData);
-    Todo.create(todoData, function (err, todo) {
+    Note.create(noteData, function (err, note) {
         if (err) {
             res.send(err);
         } else {
-            res.send(todo);
+            res.send(note);
         }
-        getTodos(res);
+        getNotes(res);
     });
     
 }
 
-module.exports = handleTodoCreate;
+module.exports = handleNoteCreate;

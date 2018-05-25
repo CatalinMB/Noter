@@ -1,63 +1,79 @@
 import {Injectable} from '@angular/core';
 import {Todo} from './todo';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import { Http, Response } from '@angular/http';
 
 @Injectable()
 export class TodoDataService {
 
-  // Placeholder for last id so we can simulate
-  // automatic incrementing of id's
-  lastId: number = 0;
+  lastId = 0;
 
-  // Placeholder for todo's
-  todos: Todo[] = [];
-
-  constructor() {
+  constructor(private http: Http) {
   }
 
   // Simulate POST /todos
-  addTodo(todo: Todo): TodoDataService {
+  addTodo(todo: Todo): Observable<Todo> {
     if (!todo.id) {
       todo.id = ++this.lastId;
     }
-    this.todos.push(todo);
-    return this;
+    return this.http
+      .post('http://localhost:3000/todo', todo)
+      .map(response => {
+        return new Todo(response.json());
+      })
+      .catch(this.handleError);
   }
 
   // Simulate DELETE /todos/:id
-  deleteTodoById(id: number): TodoDataService {
-    this.todos = this.todos
-      .filter(todo => todo.id !== id);
-    return this;
+  deleteTodoById(todoId: number): Observable<null> {
+    return this.http
+      .delete('http://localhost:3000/todo/' + todoId)
+      .map(response => null)
+      .catch(this.handleError);
   }
 
   // Simulate PUT /todos/:id
-  updateTodoById(id: number, values: Object = {}): Todo {
-    let todo = this.getTodoById(id);
-    if (!todo) {
-      return null;
-    }
-    Object.assign(todo, values);
-    return todo;
+  updateTodo(todo: Todo): Observable<Todo> {
+    return this.http
+      .put('http://localhost:3000/todo/' + todo.id, todo)
+      .map(response => {
+        return new Todo(response.json());
+      })
+      .catch(this.handleError);
   }
 
   // Simulate GET /todos
-  getAllTodos(): Todo[] {
-    return this.todos;
+  getAllTodos(): Observable<Todo[]> {
+    return this.http
+      .get('http://localhost:3000/todo')
+      .map(response => {
+        const todos = response.json();
+        return todos.map((todo) => new Todo(todo));
+      })
+      .catch(this.handleError);
   }
 
   // Simulate GET /todos/:id
-  getTodoById(id: number): Todo {
-    return this.todos
-      .filter(todo => todo.id === id)
-      .pop();
+ getTodoById(todoId: number): Observable<Todo> {
+    return this.http
+      .get('http://localhost:3000/todo' + todoId)
+      .map(response => {
+        return new Todo(response.json());
+      })
+      .catch(this.handleError);
   }
 
   // Toggle todo complete
   toggleTodoComplete(todo: Todo) {
-    let updatedTodo = this.updateTodoById(todo.id, {
-      complete: !todo.complete
-    });
-    return updatedTodo;
+    todo.complete = !todo.complete;
+    return this.updateTodo(todo);
   }
 
+  private handleError (error: Response | any) {
+    console.error('handleError', error);
+    return Observable.throw(error);
+  }
 }

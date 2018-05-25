@@ -3,8 +3,15 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
   constructor(private myRoute: Router) { }
+
+  logged = false;
+
+  set isLoggedIn(_log: boolean){
+    this.logged = _log;
+    this.myRoute.navigate(['/welcome']);
+  }
   get isLoggedIn() {
-    return true;
+    return this.logged;
   }
 
   // get isSuperAdmin() {

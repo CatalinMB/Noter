@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 declare var jquery: any;
 declare var $: any;
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: []
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(  private auth: AuthService) { }
 
   ngOnInit() {
-    console.log('init complete');
   }
 
   onSubmit(event) {
@@ -28,9 +29,9 @@ export class LoginComponent implements OnInit {
       $.post("http://localhost:3000/login", { email: logemail, password: logpassword }, function (data) {
         console.log(data);
       })
-        .done(function () {
+        .done(() => {
+          this.auth.isLoggedIn = true;
           console.log('hello3');
-          $(location).attr('href', 'http://localhost:3000/welcome');
         });
 
   }

@@ -15,6 +15,7 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     $.get("http://localhost:3000/profile", function (data) {
         $("#usernameSpace").text(data.username);
+        console.log(data.username);
     });
   }
 
