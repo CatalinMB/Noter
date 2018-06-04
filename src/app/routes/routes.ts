@@ -5,6 +5,7 @@ import { ReminderComponent } from '../reminder/reminder.component';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { AuthGuard } from '../auth-guard';
+import { LogoutComponent } from '../login/logout.component';
 
 
 
@@ -23,4 +24,5 @@ export const appRoutes = [
     { path: 'reminder', component: ReminderComponent, canActivate: [AuthGuard] },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'signup', component: RegisterComponent },
+    { path: 'logout', component: LogoutComponent}
 ];

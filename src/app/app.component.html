@@ -2,7 +2,7 @@
 </head>
 
 
-<mat-toolbar color="accent" class="navigator">
+<mat-toolbar color="accent" class="navigator" *ngIf="authService.isLogged()" >
   <mat-toolbar-row class="menuItemWrapper">
       <a routerLink="/welcome">
     <button mat-button>
@@ -24,6 +24,14 @@
       Reminders
     </button>
   </a>
+
+  <a routerLink = "/logout">
+    <button mat-button >
+      Log Out
+    </button>
+  </a>
+
+
   </mat-toolbar-row>
 </mat-toolbar>
 

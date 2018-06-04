@@ -10,7 +10,7 @@ function handleLogIn(req, res) {
       if (error || !user) {
         var err = new Error('Wrong email or password.');
         err.status = 401;
-        return next(err);
+        return (err);
       } else {
         req.session.userId = user._id;
         req.session.user = user;

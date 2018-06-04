@@ -4,21 +4,16 @@ import { Router } from '@angular/router';
 export class AuthService {
   constructor(private myRoute: Router) { }
 
-  logged = false;
+  private logged = false;
 
-  set isLoggedIn(_log: boolean){
+  set isLoggedIn(_log: boolean) {
     this.logged = _log;
     this.myRoute.navigate(['/welcome']);
   }
   get isLoggedIn() {
     return this.logged;
   }
-
-  // get isSuperAdmin() {
-  //   return true;
-  // // }
-  // logout() {
-  //   localStorage.removeItem("LoggedInUser");
-  //   this.myRoute.navigate(["/login"]);
-  // }
+  isLogged() {
+    return this.logged;
+  }
 }

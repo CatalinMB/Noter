@@ -11,26 +11,36 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(  private auth: AuthService) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
   }
 
   onSubmit(event) {
 
-      event.preventDefault();
+    event.preventDefault();
 
-      let logemail = $("#email-field").val();
-      let logpassword = $("#password-field").val();
-      console.log(logemail, " ", logpassword);
-      console.log("i am here");
+    const logemail = $('#email-field').val();
+    const logpassword = $('#password-field').val();
+    console.log(logemail, ' ', logpassword);
+    console.log('i am here');
 
-      $.post("http://localhost:3000/login", { email: logemail, password: logpassword }, function (data) {
-        console.log(data);
-      })
-        .done(() => {
-          this.auth.isLoggedIn = true;
-        });
-
+    if (!logemail) {
+      $('#emailError').css('visibility', 'visible');
+    } else {
+      if (!logpassword) {
+        $('#passwordError').css('visibility', 'visible');
+      } else {
+        $.post('http://localhost:3000/login', { email: logemail, password: logpassword }, function (data) {
+          console.log(data);
+        })
+          .done(() => {
+            this.auth.isLoggedIn = true;
+            sessionStorage.setItem('token', 'Logged in');
+            $('#emailError').css('visibility', 'hidden');
+            $('#passwordError').css('visibility', 'hidden');
+          });
+      }
+    }
   }
 }

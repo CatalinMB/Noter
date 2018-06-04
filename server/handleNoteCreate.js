@@ -2,32 +2,22 @@ var Note = require('./models/Note.js');
 var session = require('express-session')
 var mongoose = require('mongoose');
 
-function getNotes(res) {
-    Note.find(function (err, notes) {
-
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
-
-        res.json(notes); // return all notes in JSON format
-    });
-};
-
 function handleNoteCreate(req, res) {
 
+    // Creates object from the reqest body
     var noteData = {
         id: req.body.id,
         title: req.body.title,
     }
 
+   // Creates the element in the database and returns it as an object
     Note.create(noteData, function (err, note) {
         if (err) {
-            res.send(err);
+           return res.send(err);
         } else {
-            res.send(note);
+           return res.send(note);
+            console.log("note that needs to be sent: " , note);
         }
-        getNotes(res);
     });
     
 }

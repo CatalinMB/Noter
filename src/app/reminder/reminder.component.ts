@@ -11,23 +11,31 @@ import { SweetAlert } from 'sweetalert/typings/core';
   providers: []
 })
 export class ReminderComponent implements OnInit {
-  title = 'app';
-  // newreminder: reminder = new reminder();
+  
+  reminders: Reminder[] = [];
 
   constructor(private reminderDataService: ReminderDataService) {
   }
 
-  // addreminder() {
-  //   this.reminderDataService.addreminder(this.newreminder);
-  //   this.newreminder = new reminder ();
-  // }
-
   ngOnInit() {
-
+    this.reminderDataService
+    .getAllReminders()
+    .subscribe(
+      (reminders) => {
+        this.reminders = reminders;
+        console.log(reminders, 'reminders');
+      }
+    );
   }
 
   onAddReminder(reminder: Reminder) {
-    this.reminderDataService.addReminder(reminder);
+    this.reminderDataService
+    .addReminder(reminder)
+    .subscribe(
+      (reminders) => {
+        this.reminders.push(reminder);
+      }
+    );
     setInterval(function () {
       const date = new Date();
       if (date.getHours() === reminder.time.hours && date.getMinutes() === reminder.time.minutes) {
@@ -37,12 +45,15 @@ export class ReminderComponent implements OnInit {
   }
 
   onRemoveReminder(reminder) {
-    this.reminderDataService.deleteReminderById(reminder.id);
+    this.reminderDataService
+      .deleteReminderById(reminder.id)
+      .subscribe(
+        (_) => {
+          this.reminders = this.reminders.filter((r) => r.id !== reminder.id);
+          console.log('length after delete ' + this.reminders.length);
+        }
+      );
   }
-
-  // get reminders() {
-  //   return this.reminderDataService.getAllReminders();
-  // }
 
 }
 

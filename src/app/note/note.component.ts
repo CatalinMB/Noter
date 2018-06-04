@@ -9,33 +9,44 @@ import { Note } from './note';
   providers: []
 })
 export class NoteComponent implements OnInit  {
-  title = 'app';
-  // newNote: Note = new Note();
+  
+  notes: Note[] = [];
 
   constructor(private noteDataService: NoteDataService) {
   }
 
-  // addNote() {
-  //   this.noteDataService.addNote(this.newNote);
-  //   this.newNote = new Note ();
-  // }
-
   ngOnInit() {
+    this.noteDataService
+      .getAllNotes()
+      .subscribe(
+        (notes) => {
+          this.notes = notes;
+          console.log(notes, 'notes');
+        }
+      );
 
   }
 
-  onAddNote(note: Note) {
-    this.noteDataService.addNote(note);
+  onAddNote(note) {
+    this.noteDataService
+      .addNote(note)
+      .subscribe(
+        (notes) => {
+          this.notes.push(note);
+        }
+      );
   }
 
-  // onRemoveNote(note) {
-  //   this.noteDataService.deleteNotesById(note.id);
-  // }
-
-  get notes() {
-    return this.noteDataService.getAllNotes();
+  onRemoveNote(note) {
+    this.noteDataService
+      .deleteNoteById(note.id)
+      .subscribe(
+        (_) => {
+          this.notes = this.notes.filter((n) => n.id !== note.id);
+          console.log('length after delete ' + this.notes.length);
+        }
+      );
   }
-
 }
 
 

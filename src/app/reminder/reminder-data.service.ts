@@ -9,7 +9,7 @@ import { Http, Response } from '@angular/http';
 @Injectable()
 export class ReminderDataService {
 
-  lastId = 0;
+  lastId = this.getAllReminders.length;
 
   constructor(private http: Http) {
   }
@@ -17,12 +17,17 @@ export class ReminderDataService {
   // Simulate POST /reminders
   addReminder(reminder: Reminder): Observable<Reminder> {
     if (!reminder.id) {
-      reminder.id = ++this.lastId;
+      reminder.id = this.lastId + 1;
+      this.lastId = this.lastId + 1;
+      console.log(reminder.id, ' : new reminder id');
     }
+
     return this.http
       .post('http://localhost:3000/reminder', reminder)
       .map(response => {
-        return new Reminder(response.json());
+        const rd = new Reminder(response.json());
+        console.log('reminder from the server: ', rd.id, ' ', rd.title );
+        return rd;
       })
       .catch(this.handleError);
   }
@@ -37,9 +42,9 @@ export class ReminderDataService {
 
 
   // Simulate GET /reminder
-  getAllreminders(): Observable<Reminder[]> {
+  getAllReminders(): Observable<Reminder[]> {
     return this.http
-      .get('http://localhost:3000/reminder')
+      .get('http://localhost:3000/reminder-route')
       .map(response => {
         const reminders = response.json();
         return reminders.map((reminder) => new Reminder(reminder));

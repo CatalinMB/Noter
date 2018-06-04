@@ -23,6 +23,7 @@ export class TodoComponent implements OnInit {
       .subscribe(
         (todos) => {
           this.todos = todos;
+          console.log(todos, 'todos');
         }
       );
   }
@@ -31,7 +32,7 @@ export class TodoComponent implements OnInit {
     this.todoDataService
       .addTodo(todo)
       .subscribe(
-        (newTodo) => {
+        (todos) => {
           this.todos.push(todo);
         }
       );
@@ -53,6 +54,7 @@ export class TodoComponent implements OnInit {
       .subscribe(
         (_) => {
           this.todos = this.todos.filter((t) => t.id !== todo.id);
+          console.log('length after delete' + this.todos.length);
         }
       );
   }

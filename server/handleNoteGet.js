@@ -2,24 +2,11 @@ var Note = require('./models/Note.js');
 var session = require('express-session');
 var mongoose = require('mongoose');
 
-function getNotes(res) {
-    Note.find(function (err, notes) {
-
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
-
-        res.json(notes); // return all notes in JSON format
-    });
-};
-
-
 function handleNoteGet(req, res){
-    Note.find({},function(err,data){
+
+    // Finds all the elements in the database and returns them in an array of objects
+    Note.find(function(err,data){
         res.send(data);
-        // get and return all the notes after you create another
-        getNotes(res);
     });
 
 }

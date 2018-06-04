@@ -2,33 +2,23 @@ var Reminder = require('./models/Reminder.js');
 var session = require('express-session')
 var mongoose = require('mongoose');
 
-function getReminders(res) {
-    Reminder.find(function (err, reminders) {
-
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
-
-        res.json(reminders); // return all reminders in JSON format
-    });
-};
-
 function handleReminderCreate(req, res) {
 
+    // Creates object from the reqest body
     var reminderData = {
         id: req.body.id,
         title: req.body.title,
         time: req.body.time
     }
 
+   // Creates the element in the database and returns it as an object
     Reminder.create(reminderData, function (err, reminder) {
         if (err) {
-            res.send(err);
+           return res.send(err);
         } else {
-            res.send(reminder);
+           return res.send(reminder);
+            console.log("reminder that needs to be sent: " , reminder);
         }
-        getReminders(res);
     });
     
 }

@@ -41,6 +41,7 @@ import { appRoutes } from './routes/routes';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {AuthService} from './auth.service';
+import { LogoutComponent } from './login/logout.component';
 
 
 
@@ -65,6 +66,7 @@ import {AuthService} from './auth.service';
     ReminderListFooterComponent,
     ReminderListHeaderComponent,
     LoginComponent,
+    LogoutComponent,
     RegisterComponent
   ],
   imports: [

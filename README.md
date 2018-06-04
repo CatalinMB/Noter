@@ -1,18 +1,48 @@
 # Noter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+This application made by using the elements in the MEAN stack and following its model, handles user accounts and offers the possibility to CRUD notes, todos and reminders.
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-## Code scaffolding
+### Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Clone the repository from here:
 
-## Build
+```
+git clone https://github.com/CatalinMB/Noter
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Make sure you have all the elements in the MEAN stack, which are:
+
+* [Mongodb]
+* [Express]
+* [Angular 4+]
+* [NodeJS]
+
+
+### Installing
+
+A step by step series of examples that tell you how to get a development env running
+
+Run the following command to add the dependencies:
+
+```
+npm install
+```
+
+The build artifacts will be stored in the dist/ directory. Use the -prod flag for a production build. To build the client-side part of the application, run the following command:
+
+```
+ng build
+```
+
+Afterwards, start the server (using Nodemon): 
+
+```
+nodemon server.js
+```
 
 ## Running unit tests
 
@@ -22,6 +52,21 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Built With
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* [MongoDB](https://docs.mongodb.com/manual/tutorial/getting-started/) - The database used
+* [Express](https://expressjs.com/en/4x/api.html) - Web framework
+* [Angular 4](https://angular.io/guide/quickstart) - Front-end framework
+* [NodeJS](https://nodejs.org/en/about/) - Run time environment for handling the back-end
+* [NgRedux](https://github.com/angular-redux/store) - npm package, implements redux store for keeping track of the routes' states
+
+etc. 
+
+## Authors
+
+* **Marius-Catalin Bunescu** - [Noter](https://github.com/CatalinMB/Noter)
+
+## Acknowledgments
+
+* Inspiration: https://github.com/addyosmani/todomvc-angular-4
+

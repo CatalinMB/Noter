@@ -9,7 +9,7 @@ import { Http, Response } from '@angular/http';
 @Injectable()
 export class NoteDataService {
 
-  lastId = 0;
+  lastId = this.getAllNotes.length;
 
   constructor(private http: Http) {
   }
@@ -17,14 +17,19 @@ export class NoteDataService {
   // Simulate POST /notes
   addNote(note: Note): Observable<Note> {
     if (!note.id) {
-      note.id = ++this.lastId;
+      note.id = this.lastId + 1;
+      this.lastId = this.lastId +1;
+      console.log(note.id, ' : new todo id');
     }
+
     return this.http
-      .post('http://localhost:3000/note', note)
-      .map(response => {
-        return new Note(response.json());
-      })
-      .catch(this.handleError);
+    .post('http://localhost:3000/note', note)
+    .map(response => {
+      const n = new Note(response.json());
+      console.log('todo from the server: ', n.id, ' ', n.title );
+      return n;
+    })
+    .catch(this.handleError);
   }
 
   // Simulate DELETE /notes/:id
@@ -39,7 +44,7 @@ export class NoteDataService {
   // Simulate GET /notes
   getAllNotes(): Observable<Note[]> {
     return this.http
-      .get('http://localhost:3000/note')
+      .get('http://localhost:3000/note-route')
       .map(response => {
         const notes = response.json();
         return notes.map((note) => new Note(note));

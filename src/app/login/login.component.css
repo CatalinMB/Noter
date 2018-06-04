@@ -53,3 +53,7 @@
 a {
     color: #1ddc9c
 }
+
+#emailError, #passwordError{
+    visibility: hidden;
+}

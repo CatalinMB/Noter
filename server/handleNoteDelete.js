@@ -1,11 +1,11 @@
-var Todo = require('./models/Todo.js');
+var Note = require('./models/Note.js');
 var session = require('express-session');
 var mongoose = require('mongoose');
 
-function handleTodoDelete(req, res){
+function handleNoteDelete(req, res){
 
     // Removes the object in the database based on the id
-    Todo.remove({ id : req.params.id }, function(err) {
+    Note.remove({ id : req.params.id }, function(err) {
         if (!err) {
                 console.log(req.params.id);
                 res.send("ok");
@@ -17,4 +17,4 @@ function handleTodoDelete(req, res){
     });
 
 }
-module.exports = handleTodoDelete;
+module.exports = handleNoteDelete;

@@ -16,15 +16,21 @@ export class TodoDataService {
 
   // Simulate POST /todos
   addTodo(todo: Todo): Observable<Todo> {
-    if (todo.id) {
+    if (!todo.id) {
       todo.id = this.lastId + 1;
+      this.lastId = this.lastId + 1;
+      console.log(todo.id, ' : new todo id');
     }
+
     return this.http
       .post('http://localhost:3000/todo', todo)
       .map(response => {
-        return new Todo(response.json());
+        const td = new Todo(response.json());
+        console.log('todo from the server: ', td.id, ' ', td.title );
+        return td;
       })
       .catch(this.handleError);
+
   }
 
   // Simulate DELETE /todos/:id
@@ -45,10 +51,11 @@ export class TodoDataService {
       .catch(this.handleError);
   }
 
+
   // Simulate GET /todos
   getAllTodos(): Observable<Todo[]> {
     return this.http
-      .get('http://localhost:3000/todo')
+      .get('http://localhost:3000/todo-route')
       .map(response => {
         const todos = response.json();
         return todos.map((todo) => new Todo(todo));
