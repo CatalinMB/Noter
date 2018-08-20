@@ -20,6 +20,7 @@ Make sure you have all the elements in the MEAN stack, which are:
 * [Express]
 * [Angular 4+]
 * [NodeJS]
+* + [Redux]
 
 
 ### Installing
@@ -58,7 +59,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 * [Express](https://expressjs.com/en/4x/api.html) - Web framework
 * [Angular 4](https://angular.io/guide/quickstart) - Front-end framework
 * [NodeJS](https://nodejs.org/en/about/) - Run time environment for handling the back-end
-* [NgRedux](https://github.com/angular-redux/store) - npm package, implements redux store for keeping track of the routes' states
+* [NgRedux](https://github.com/angular-redux) - npm package for managing the state of the application
 
 etc. 
 

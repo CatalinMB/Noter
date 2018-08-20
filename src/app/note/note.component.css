@@ -6,3 +6,8 @@
     position: absolute;
     transform: translate(-50%, -50%);
 }
+.wrapper{
+    position: absolute;
+    left: 400px;
+    top: 120px;
+}

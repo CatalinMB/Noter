@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReminderDataService } from './reminder-data.service';
 import { Reminder } from './reminder';
-import { SweetAlert } from 'sweetalert/typings/core';
 
 
 @Component({
@@ -11,7 +10,7 @@ import { SweetAlert } from 'sweetalert/typings/core';
   providers: []
 })
 export class ReminderComponent implements OnInit {
-  
+
   reminders: Reminder[] = [];
 
   constructor(private reminderDataService: ReminderDataService) {

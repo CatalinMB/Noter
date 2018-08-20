@@ -4,8 +4,8 @@
       <p id="text-header">Welcome!</p>
     </div>
 
-    <div class="inputs" (submit)="onSubmit($event)">
-      <form class="signInForm">
+    <!-- <div class="inputs" (submit)="onSubmit($event)"> -->
+      <!-- <form class="signInForm">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input class="mdl-textfield__input" id="email-field" type="text" name="email" required>
           <label class="mdl-textfield__label" for="email-field">E-mail</label>
@@ -18,7 +18,36 @@
         </div>
         <a href="/signup">Sign Up</a>
         <input id="submitButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="submit" value="LogIn">
+      </form> -->
+      <div class="inputs">
+      <form [formGroup]="loginForm" novalidate (submit)="onSubmitLogin(loginForm)" class="signInForm">
+        <div>
+        <mat-form-field>
+        <input matInput id="email-field" type="text" formControlName="email" placeholder="E-mail" required>
+        <!-- <label class="mdl-textfield__label" for="emailField">E-mail</label> -->
+        <mat-error *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched">
+            Please fill out the e-mail field!
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+          <input matInput id="password-field" type="password" formControlName="password" placeholder="Password" required>
+          <mat-error *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
+              Please fill out the password field!
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <a href="/signup">Sign Up</a>
+
+        <button id="submitButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="submit" [disabled]="!loginForm.valid">Submit</button>
+
+        <p>Form value: {{ loginForm.value | json }}</p>
+        <p>Is form valid: {{ loginForm.valid | json }}</p>
+
       </form>
     </div>
-  </div>
+    </div>
 </section>

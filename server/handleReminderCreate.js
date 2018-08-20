@@ -7,6 +7,7 @@ function handleReminderCreate(req, res) {
     // Creates object from the reqest body
     var reminderData = {
         id: req.body.id,
+        user: req.session.user,
         title: req.body.title,
         time: req.body.time
     }

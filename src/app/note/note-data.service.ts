@@ -19,14 +19,16 @@ export class NoteDataService {
     if (!note.id) {
       note.id = this.lastId + 1;
       this.lastId = this.lastId +1;
-      console.log(note.id, ' : new todo id');
+      console.log(note.id, ' : new note id');
     }
+
+    console.log("the added note ", note);
 
     return this.http
     .post('http://localhost:3000/note', note)
     .map(response => {
       const n = new Note(response.json());
-      console.log('todo from the server: ', n.id, ' ', n.title );
+      console.log('note from the server: ', n.id, ' ', n.title );
       return n;
     })
     .catch(this.handleError);

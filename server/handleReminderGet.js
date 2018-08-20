@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 function handleReminderGet(req, res){
 
     // Finds all the elements in the database and returns them in an array of objects
-    Reminder.find(function(err,data){
+    Reminder.find({user: req.session.user}, function(err,data){
         console.log(res.reminders, " :let's see the reminders");
         res.send(data);
     });

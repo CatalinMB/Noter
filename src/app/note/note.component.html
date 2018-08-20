@@ -1,4 +1,17 @@
 <section class="noter">
+    <div class='wrapper'>
+        <mat-form-field >
+                <input matInput placeholder="Search" [(ngModel)]="search">
+              </mat-form-field>
+
+
+        <div *ngFor="let note of notes | filterNotes: search">
+        <div *ngIf="note === -1"> No note found </div>
+        
+         <p> {{note.title}}</p>
+        </div>
+    </div>
+    
     <app-note-list-header (add)="onAddNote($event)"></app-note-list-header>
     <app-note-list [notes]="notes" 
     (remove)="onRemoveNote($event)"></app-note-list>

@@ -5,27 +5,39 @@
     </div>
 
     <div class="inputs">
-      <form class="signUpForm" (submit)="onSubmit($event)">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" id="semail-field" type="text" name="email" required>
-          <label class="mdl-textfield__label" for="semail-field">E-mail</label>
+      <form [formGroup]="registerForm" novalidate (submit)="onSubmitRegister(registerForm)" class="signUpForm">
+        <div>
+          <mat-form-field>
+            <input matInput id="semail-field" type="text" formControlName="email" placeholder="E-mail" required>
+            <mat-error *ngIf="registerForm.controls.email.errors?.required && registerForm.controls.email.touched">
+              Please fill out the e-mail field!
+            </mat-error>
+          </mat-form-field>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" id="susername-field" type="text" name="username" required>
-          <label class="mdl-textfield__label" for="susername-field">Username</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" id="spassword-field" type="password" name="password" required>
-          <label class="mdl-textfield__label" for="spassword-field">Password</label>
-        </div>
-        <input id="submitButton" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" value="Register">
+        <div>
+            <mat-form-field>
+              <input id="susername-field" matInput type="text" formControlName="username" placeholder="Username" required>
+              <mat-error *ngIf="registerForm.controls.username.errors?.required && registerForm.controls.username.touched">
+                Please fill out the usern field!
+              </mat-error>
+            </mat-form-field>
+          </div>
+        <div>
+            <mat-form-field>
+            <input matInput type="password" id="spassword-field" formControlName="password" placeholder="Password" required>
+            <mat-error *ngIf="registerForm.controls.password.errors?.required && registerForm.controls.password.touched">
+                Please fill out the password field!
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <button id="submitButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="submit" [disabled]="!registerForm.valid">Register</button>
       </form>
     </div>
     <p>
       <a href="#"> By clicking register, I agree to your terms</a>
     </p>
   </div>
-  
+
   <div class="clear"></div>
   <!--//signin-form-->
 </section>

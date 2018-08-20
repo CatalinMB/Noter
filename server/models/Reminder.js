@@ -6,6 +6,11 @@ var ReminderSchema = new mongoose.Schema({
         type: Number,
         required:true
     },
+    
+    user: {
+        type: String,
+        required: true
+    },
 
     title: {
         type: String,

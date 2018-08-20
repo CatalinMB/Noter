@@ -2,11 +2,12 @@ var Note = require('./models/Note.js');
 var session = require('express-session')
 var mongoose = require('mongoose');
 
-function handleNoteCreate(req, res) {
+function handleNoteCreate(req, res) { 
 
     // Creates object from the reqest body
     var noteData = {
         id: req.body.id,
+        user: req.session.user.email,
         title: req.body.title,
     }
 

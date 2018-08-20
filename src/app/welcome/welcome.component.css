@@ -12,6 +12,16 @@
     color: #4d4d4d;
     opacity: 0.35;
     margin: auto;
+    clear: both;
+}
+.titles{
+    display: flex;
+    flex-direction: row;
+    vertical-align:middle;
+}
+
+.buttons{
+    vertical-align:middle;
 }
 
 button{

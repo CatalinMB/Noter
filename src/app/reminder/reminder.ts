@@ -2,6 +2,7 @@ import { Time } from '@angular/common';
 
 export class Reminder {
     id: number;
+    user: string = ' ';
     title: string = '';
     time: Time;
     constructor(values: Object = {}) {

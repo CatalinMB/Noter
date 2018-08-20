@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 function handleNoteGet(req, res){
 
     // Finds all the elements in the database and returns them in an array of objects
-    Note.find(function(err,data){
+    Note.find({ user: req.session.user.email}, function(err,data){
         res.send(data);
     });
 

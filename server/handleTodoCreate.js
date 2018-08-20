@@ -7,6 +7,7 @@ function handleTodoCreate(req, res) {
     // Creates object from the reqest body
     var todoData = {
         id: req.body.id,
+        user: req.session.user,
         title: req.body.title,
         complete: req.body.complete
     }

@@ -17,14 +17,16 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     // check if you get the token from the server
-    if (sessionStorage.getItem('token') === 'Logged in') {
-      return true;
-    }
+    // if (sessionStorage.getItem('token') === 'Logged in') {
+    //   return true;
+    // }
     // handle any redirects if a user isn't authenticated
     if (!this.auth.isLoggedIn) {
       // redirect the user
       this.router.navigate(['/login']);
       return false;
+    } else {
+        return true;
     }
   }
 }
